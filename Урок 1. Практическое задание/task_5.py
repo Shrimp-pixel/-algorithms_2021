@@ -28,3 +28,55 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class StackClass:
+    allStack = []
+
+    def __init__(self):
+        self.elems = []
+        self.nextstack = None
+        StackClass.allStack.append(self)
+
+    def is_empty(self):
+        return self.elems == []
+
+    def push_in(self, el):
+        """Предполагаем, что верхний элемент стека находится в начале списка"""
+        if len(self.elems) < 10:
+            self.elems.insert(0, el)
+        else:
+            if self.nextstack is None:
+                self.nextstack = StackClass()
+            self.nextstack.push_in(el)
+
+    def pop_out(self):
+        return self.elems.pop(0)
+
+    def get_val(self):
+        return self.elems[0]
+
+    def stack_size(self):
+        return len(self.elems)
+
+
+sc = StackClass()
+for i in range(101):
+    sc.push_in("Тарелка№ " + str(i))
+
+for i in StackClass.allStack:
+    print(i.elems)
+
+print()
+StackClass.allStack.clear()
+sc = StackClass()
+for i in range(11):
+    sc.push_in("Тарелка№ " + str(i))
+
+sc = StackClass()
+for i in range(12, 32):
+    sc.push_in("Тарелка№ " + str(i))
+
+for i in StackClass.allStack:
+    print(i.elems)
+
