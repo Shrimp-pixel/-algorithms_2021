@@ -25,3 +25,52 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+
+
+class User:
+    def __init__(self, login, password, act):
+        self.login = login
+        self.password = password
+        self.act = act
+
+
+data_base = [User("login1", "12345", False), User("login2", "ghnjm1", True), User("login3", "67nd1", True),
+             User("login4", "3gedccc", False)]
+
+
+def fun1(db, user_name):  # 0(N)
+    for log in db:  # 0(N)
+        if log.login == user_name:  # 0(1)
+            if not log.act:  # 0(1)
+                print("Активируйте аккаунт")
+            else:  # 0(1)
+                print("Вход в аккаунт разрешен")
+            break  # 0(1)
+    else:  # 0(1)
+        print("Пройдите регестрацию")
+
+
+fun1(data_base, "login1")
+fun1(data_base, "login2")
+fun1(data_base, "login5")
+
+
+def fun2(db, user_name):  # 0(N)
+    logins = []  # 0(1)
+    for log in db:  # 0(N)
+        logins.append(log.login)  # 0(1)
+    if user_name in logins:  # 0(N)
+        if not db[logins.index(user_name)].act:  # 0(1)
+            print("Активируйте аккаунт")
+        else:  # 0(1)
+            print("Вход в аккаунт разрешен")
+    else:  # 0(1)
+        print("Пройдите регестрацию")
+
+
+print()
+fun2(data_base, "login1")
+fun2(data_base, "login2")
+fun2(data_base, "login5")
+
+"""Обе функции получились одинаковы по эффективности т.к. используют всего один цикл """
