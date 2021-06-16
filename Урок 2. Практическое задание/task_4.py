@@ -12,3 +12,11 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def countSeries(n, number=1.0):
+    return number + countSeries(n - 1, number / 2.0 * -1) if n != 0 else 0
+
+
+print(countSeries(3))
+print(countSeries(4))
