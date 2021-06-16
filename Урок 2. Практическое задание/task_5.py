@@ -21,3 +21,12 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def asciiTable(simb=32):
+    if simb == 128:
+        return ""
+    return (print(str(simb) + " - " + chr(simb), end=' ' if simb % 10 != 1 else '\n'), asciiTable(simb+1)) if simb != 128 else ""
+
+
+asciiTable()

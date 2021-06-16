@@ -18,3 +18,19 @@
 Решите через рекурсию. Решение через цикл не принимается.
 Для оценки Отлично в этом блоке необходимо выполнить 5 заданий из 7
 """
+
+
+def count(number, even=0, odd=0):
+    if number == 0:
+        print("Количество четных и нечетных цифр в числе равно: " + str((even, odd)))
+        return
+    if number % 10 % 2 == 0:
+        even = even + 1
+    else:
+        odd = odd + 1
+    return count(number // 10, even, odd)
+
+
+count(34560)
+count(12345)
+count(10001)
