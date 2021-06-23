@@ -16,3 +16,25 @@
 р
 а
 """
+
+
+def fun1(st):
+    hash_ls = []
+    a = 0
+    b = 1
+    while True:
+        if a == len(st):
+            b = b - a + 1
+            a = 0
+            if b == len(st):
+                break
+        s = st[a:b]
+        hh = hash(s)
+        if hh not in hash_ls:
+            print(s)
+            hash_ls.append(hh)
+        a, b = a + 1, b + 1
+    print(st + f" - {len(hash_ls)} уникальных подстрок")
+
+
+fun1("papa")
