@@ -18,3 +18,59 @@
 Обязательно усложните задачу! Добавьте сохранение хеша в файле и получение его из файла.
 А если вы знаете как через Python работать с БД, привяжите к заданию БД и сохраняйте хеши там.
 """
+
+from hashlib import sha256
+from random import randint
+
+
+def hashpassword(login, password):
+    hashpw = sha256(login.encode() + password.encode()).hexdigest()
+    return hashpw
+
+
+def createDB():
+    with open("DB.csv", 'w') as f:
+        with open("users_password(not_hashed).csv", 'w') as p:
+            for i in range(10):
+                password = str(randint(1000, 10000))
+                #print(password)
+                p.writelines("login" + str(i) + "," + password + '\n')
+                f.writelines("login" + str(i) + "," + str(hashpassword("login" + str(i), password)) + "\n")
+
+
+def validation(login):
+    password = input("Введите пароль еще раз для проверки:")
+    with open("DB.csv", 'r') as f:
+        for line in f:
+            log_password = line[:-1].split(',')
+            if log_password[0] == login:
+                if log_password[1] == hashpassword(login, password):
+                    print("Вы ввели правильный пароль")
+                else:
+                    print("Вы ввели неправильный пароль")
+
+
+def create_new_user():
+    while True:
+        login = input("Введите новый логин:")
+        password = input("Введите новый пароль:")
+        with open("DB.csv", 'r') as f:
+            for line in f:
+                log_password = line[:-1].split(',')
+                if log_password[0] == login:
+                    print("Пользователь уже существует")
+                    break
+            else:
+                break
+    with open("DB.csv", 'a') as f:
+        with open("users_password(not_hashed).csv", 'a') as p:
+            p.writelines(login + "," + password + '\n')
+            f.writelines(login + "," + str(hashpassword(login, password)) + "\n")
+            print("Пользователь успешно создан")
+            print("В базе данных хранится строка:" + str(hashpassword(login, password)))
+    return login
+
+
+#createDB()
+validation(create_new_user())
+
