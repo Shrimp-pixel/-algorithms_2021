@@ -11,3 +11,18 @@
 
 Задание творческое. Здесь нет жестких требований к выполнению.
 """
+from hashlib import sha256
+
+salt = "qsdfvgbhnjmkolp56dsf4as615f224"
+DB = {}
+
+
+def fun(url):
+    if url in DB.keys():
+        print(f"{url} уже в базе данных")
+    else:
+        DB[url] = sha256(salt.encode() + url.encode()).hexdigest()
+
+fun("https://www.google.com/")
+fun("https://www.yandex.com/")
+fun("https://www.google.com/")
