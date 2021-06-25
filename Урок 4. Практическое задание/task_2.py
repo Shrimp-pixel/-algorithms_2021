@@ -79,3 +79,7 @@ print(
         'recursive_reverse_mem(num_10000)',
         setup='from __main__ import recursive_reverse_mem, num_10000',
         number=10000))
+"""
+После превого запуска функций с декоратором memoize кеш заполняется числами и 
+последующие 'тестовые' запуск используют кеш поэтому скорее всего memorize не оптимизирует функцию.
+"""
